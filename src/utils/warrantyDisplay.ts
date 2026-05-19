@@ -1,0 +1,63 @@
+import type { StatusTone } from '../types/registration'
+
+export const getStatusTone = (status?: string): StatusTone => {
+  if (status === 'approved') {
+    return 'approved'
+  }
+  if (status === 'rejected') {
+    return 'rejected'
+  }
+
+  return 'pending'
+}
+
+export const getStatusMeta = (status?: string) => {
+  const tone = getStatusTone(status)
+
+  if (tone === 'approved') {
+    return {
+      label: 'ลงทะเบียนแล้ว',
+      title: 'ข้อมูลของคุณได้รับการอนุมัติแล้ว',
+      description: 'สามารถใช้งานเมนูสมาชิกและตรวจสอบสิทธิ์จาก Rich menu ได้ทันที',
+      badgeClassName: 'bg-emerald-100 text-emerald-700',
+      panelClassName: 'border-emerald-200 bg-emerald-50',
+    }
+  }
+
+  if (tone === 'rejected') {
+    return {
+      label: 'ต้องแก้ไขข้อมูล',
+      title: 'ข้อมูลยังไม่ผ่านการตรวจสอบ',
+      description: 'กรุณาติดต่อร้านผ่าน LINE เพื่อสอบถามรายละเอียดและแก้ไขข้อมูล',
+      badgeClassName: 'bg-[#fff1eb] text-[#b4543b]',
+      panelClassName: 'border-[#f0c8bb] bg-[#fff1eb]',
+    }
+  }
+
+  return {
+    label: 'รอตรวจสอบ',
+    title: 'ร้านได้รับข้อมูลการลงทะเบียนแล้ว',
+    description: 'กรุณารอตรวจสอบข้อมูล ระบบจะอัปเดตสถานะให้อัตโนมัติหลังร้านตรวจเสร็จ',
+    badgeClassName: 'bg-[#f7e9d8] text-[#765236]',
+    panelClassName: 'border-[#ead8c4] bg-[#fffaf3]',
+  }
+}
+
+export const getDisplayValue = (value?: string) => value?.trim() || '-'
+
+export const formatThaiDate = (value?: string | null) => {
+  if (!value) {
+    return '-'
+  }
+
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) {
+    return value
+  }
+
+  return new Intl.DateTimeFormat('th-TH', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(date)
+}
