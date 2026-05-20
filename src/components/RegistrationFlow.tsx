@@ -113,10 +113,7 @@ export function WarrantyForm({
     <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(255,30,26,0.18)]">
       <div className="mb-5 flex items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ff4a45]">
-            Serial {form.serialNumber}
-          </p>
-          <h1 className="mt-1 text-2xl font-black text-white">
+          <h1 className="text-2xl font-black text-white">
             ข้อมูลลงทะเบียนลูกค้า
           </h1>
         </div>

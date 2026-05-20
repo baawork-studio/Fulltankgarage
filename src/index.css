@@ -37,6 +37,8 @@
   }
 
   input[type="date"] {
+    max-width: 100%;
+    min-width: 0;
     color-scheme: dark;
   }
 }

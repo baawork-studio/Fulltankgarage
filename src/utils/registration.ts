@@ -12,7 +12,7 @@ export const getInitialSerialFromUrl = () => {
 
 export const getInputClass = (hasError?: boolean) =>
   [
-    'h-12 w-full rounded-xl border bg-[#101010] px-4 text-base text-white outline-none transition',
+    'block h-12 w-full min-w-0 max-w-full rounded-xl border bg-[#101010] px-4 text-base text-white outline-none transition',
     'placeholder:text-white/38 focus:border-[#ff3a35] focus:ring-4 focus:ring-[#ff3a35]/16',
     hasError ? 'border-[#ff3a35]' : 'border-white/14',
   ].join(' ')
