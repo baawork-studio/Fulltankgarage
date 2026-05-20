@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { ChangeEvent, FormEvent } from 'react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   getEntryView,
   getLineIdentity,
@@ -74,10 +74,14 @@ function App() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [notice, setNotice] = useState('')
   const [noticeTone, setNoticeTone] = useState<NoticeTone>('info')
+  const [noticeKey, setNoticeKey] = useState(0)
   const [isCheckingMember, setIsCheckingMember] = useState(true)
   const [isCheckingSerial, setIsCheckingSerial] = useState(false)
   const [isCheckingWalletSerial, setIsCheckingWalletSerial] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const noticeTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(
+    null,
+  )
   const isCardEntry = getEntryView() === 'card'
 
   const normalizedSerial = useMemo(
@@ -86,9 +90,26 @@ function App() {
   )
 
   const showNotice = (message: string, tone: NoticeTone = 'info') => {
+    if (noticeTimerRef.current) {
+      window.clearTimeout(noticeTimerRef.current)
+    }
+
     setNotice(message)
     setNoticeTone(tone)
+    setNoticeKey((current) => current + 1)
+    noticeTimerRef.current = window.setTimeout(() => {
+      setNotice('')
+      noticeTimerRef.current = null
+    }, 3200)
   }
+
+  useEffect(() => {
+    return () => {
+      if (noticeTimerRef.current) {
+        window.clearTimeout(noticeTimerRef.current)
+      }
+    }
+  }, [])
 
   const loadRegistrationStatus = useCallback(async () => {
     try {
@@ -407,7 +428,9 @@ function App() {
           />
         )}
 
-        {notice ? <Notice message={notice} tone={noticeTone} /> : null}
+        {notice ? (
+          <Notice key={noticeKey} message={notice} tone={noticeTone} />
+        ) : null}
         {phase === 'warranty-status' ? null : (
           <CompanyFooter fillAvailable={phase === 'serial'} />
         )}

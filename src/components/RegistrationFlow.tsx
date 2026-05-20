@@ -317,18 +317,20 @@ export function SuccessCard({
 
 export function Notice({ message, tone }: { message: string; tone: NoticeTone }) {
   return (
-    <div
-      className={[
-        'rounded-xl border px-4 py-3 text-sm font-bold leading-6',
-        tone === 'success'
-          ? 'border-emerald-400/30 bg-emerald-500/12 text-emerald-100'
-          : tone === 'error'
-            ? 'border-[#ff3a35]/35 bg-[#ff3a35]/14 text-[#ffd7d5]'
-            : 'border-white/14 bg-white/8 text-white/78',
-      ].join(' ')}
-      role="status"
-    >
-      {message}
+    <div className="pointer-events-none fixed left-0 right-0 top-[calc(env(safe-area-inset-top)+4.75rem)] z-[120] flex justify-center px-4">
+      <div
+        className={[
+          'snackbar-notice w-[min(100%,28rem)] rounded-2xl border px-4 py-3 text-center text-sm font-black leading-6 text-white shadow-[0_18px_42px_rgba(0,0,0,0.35)]',
+          tone === 'success'
+            ? 'border-[#00d084]/30 bg-[#00d084]'
+            : tone === 'error'
+              ? 'border-[#ff5a76]/30 bg-[#ff5a76]'
+              : 'border-[#00b5e8]/30 bg-[#00b5e8]',
+        ].join(' ')}
+        role="status"
+      >
+        {message}
+      </div>
     </div>
   )
 }
