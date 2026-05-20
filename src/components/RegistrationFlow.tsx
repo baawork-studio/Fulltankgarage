@@ -152,7 +152,7 @@ export function WarrantyForm({
             label="รุ่นรถ"
             name="carModel"
             onChange={onChange}
-            placeholder="Toyota Camry"
+            placeholder="Mercedes-Benz S-Class"
             value={form.carModel}
           />
           <Field
@@ -171,7 +171,7 @@ export function WarrantyForm({
             label="แบรนด์ฟิล์ม"
             name="filmBrand"
             onChange={onChange}
-            placeholder="FULLTANK"
+            placeholder="SolarKey"
             value={form.filmBrand}
           />
           <Field
@@ -179,7 +179,7 @@ export function WarrantyForm({
             label="รุ่นฟิล์ม"
             name="filmModel"
             onChange={onChange}
-            placeholder="Ceramic Black"
+            placeholder="Ultra ir"
             value={form.filmModel}
           />
         </div>
