@@ -43,11 +43,12 @@
     max-inline-size: 100%;
     min-inline-size: 0;
     color-scheme: dark;
+    text-align: center;
   }
 
   input[type="date"]::-webkit-date-and-time-value {
     min-inline-size: 0;
-    text-align: start;
+    text-align: center;
   }
 
   input[type="date"]::-webkit-calendar-picker-indicator {
