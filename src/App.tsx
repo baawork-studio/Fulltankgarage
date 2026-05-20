@@ -59,6 +59,7 @@ const initialForm: RegistrationForm = {
 }
 
 function App() {
+  const isCardEntry = getEntryView() === 'card'
   const [phase, setPhase] = useState<Phase>('serial')
   const [serialInput, setSerialInput] = useState(getInitialSerialFromUrl)
   const [isConsentAccepted, setIsConsentAccepted] = useState(false)
@@ -75,14 +76,13 @@ function App() {
   const [notice, setNotice] = useState('')
   const [noticeTone, setNoticeTone] = useState<NoticeTone>('info')
   const [noticeKey, setNoticeKey] = useState(0)
-  const [isCheckingMember, setIsCheckingMember] = useState(true)
+  const [isCheckingMember, setIsCheckingMember] = useState(isCardEntry)
   const [isCheckingSerial, setIsCheckingSerial] = useState(false)
   const [isCheckingWalletSerial, setIsCheckingWalletSerial] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const noticeTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(
     null,
   )
-  const isCardEntry = getEntryView() === 'card'
 
   const normalizedSerial = useMemo(
     () => serialInput.trim().toUpperCase(),
@@ -113,7 +113,7 @@ function App() {
 
   const loadRegistrationStatus = useCallback(async () => {
     try {
-      setIsCheckingMember(true)
+      setIsCheckingMember(isCardEntry)
       const identity = await getLineIdentity()
       setLineIdentity(identity)
 
@@ -149,7 +149,7 @@ function App() {
     } finally {
       setIsCheckingMember(false)
     }
-  }, [])
+  }, [isCardEntry])
 
   useEffect(() => {
     void Promise.resolve().then(loadRegistrationStatus)
