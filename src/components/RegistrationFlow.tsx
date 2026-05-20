@@ -268,7 +268,7 @@ function Field({
   maxLength?: number
 }) {
   return (
-    <label className="block text-sm font-bold text-white/86">
+    <label className="block min-w-0 text-sm font-bold text-white/86">
       {label}
       <input
         aria-invalid={Boolean(error)}
