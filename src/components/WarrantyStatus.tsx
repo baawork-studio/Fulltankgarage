@@ -11,7 +11,7 @@ import { formatThaiDate, getDisplayValue, getStatusMeta } from '../utils/warrant
 export function WarrantyStatusSkeleton() {
   return (
     <section className="flex min-h-dvh flex-col bg-[#111] text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/95 px-4 py-3 pt-[calc(env(safe-area-inset-top)+12px)] backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080205]/95 px-4 py-3 pt-[calc(env(safe-area-inset-top)+12px)] backdrop-blur">
         <div className="flex min-h-14 items-center justify-center gap-3">
           <img
             alt=""
@@ -19,7 +19,7 @@ export function WarrantyStatusSkeleton() {
             src={fulltankGarageLogo}
           />
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-[#ff4038]">
+            <p className="truncate text-sm font-semibold text-[#C0392B]">
               FULLTANK GARAGE
             </p>
             <h1 className="truncate text-lg font-bold">
@@ -30,8 +30,8 @@ export function WarrantyStatusSkeleton() {
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 py-5 pb-[calc(env(safe-area-inset-bottom)+18px)]">
-        <div className="overflow-hidden rounded-2xl border border-[#ff3a35]/35 bg-[#080808] shadow-[0_16px_38px_rgba(255,42,35,0.16)]">
-          <div className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden bg-[#080808] p-4">
+        <div className="overflow-hidden rounded-2xl border border-[#C0392B]/35 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.16)]">
+          <div className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden bg-[#080205] p-4">
             <img
               alt=""
               className="absolute inset-0 size-full object-fill opacity-40"
@@ -77,7 +77,7 @@ export function WarrantyStatusSkeleton() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-dashed border-[#ff4038]/45 bg-[#090909] shadow-[0_16px_38px_rgba(255,42,35,0.12)]">
+        <div className="overflow-hidden rounded-2xl border border-dashed border-[#C0392B]/45 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.12)]">
           <div className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden p-5 text-center">
             <img
               alt=""
@@ -86,7 +86,7 @@ export function WarrantyStatusSkeleton() {
             />
             <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,0,0,0.86),rgba(0,0,0,0.5)_52%,rgba(0,0,0,0.86))]" />
             <div className="relative flex flex-1 flex-col items-center justify-center gap-2">
-              <span className="grid size-12 place-items-center rounded-2xl border border-[#ff4038]/45 bg-[#ff4038]/12 text-3xl font-black text-[#ff625d]">
+              <span className="grid size-12 place-items-center rounded-2xl border border-[#C0392B]/45 bg-[#C0392B]/12 text-3xl font-black text-[#C0392B]">
                 +
               </span>
               <span className="text-xl font-black text-white">
@@ -146,7 +146,7 @@ export function WarrantyStatusPage({
 
   return (
     <section className="flex min-h-dvh flex-col bg-[#111] text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/95 px-4 py-3 pt-[calc(env(safe-area-inset-top)+12px)] backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080205]/95 px-4 py-3 pt-[calc(env(safe-area-inset-top)+12px)] backdrop-blur">
         <div className="flex min-h-14 items-center justify-center gap-3">
           <img
             alt=""
@@ -154,7 +154,7 @@ export function WarrantyStatusPage({
             src={lineIdentity?.linePictureUrl || fulltankGarageLogo}
           />
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-[#ff4038]">
+            <p className="truncate text-sm font-semibold text-[#C0392B]">
               FULLTANK GARAGE
             </p>
             <h1 className="truncate text-lg font-bold">
@@ -176,7 +176,7 @@ export function WarrantyStatusPage({
           />
         ))}
 
-        <div className="overflow-hidden rounded-2xl border border-dashed border-[#ff4038]/45 bg-[#090909] shadow-[0_16px_38px_rgba(255,42,35,0.12)]">
+        <div className="overflow-hidden rounded-2xl border border-dashed border-[#C0392B]/45 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.12)]">
           <button
             className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden p-5 text-center transition active:scale-[0.99]"
             onClick={() => setIsAddingSerial((current) => !current)}
@@ -189,7 +189,7 @@ export function WarrantyStatusPage({
             />
             <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,0,0,0.82),rgba(0,0,0,0.46)_52%,rgba(0,0,0,0.82))]" />
             <div className="relative flex flex-1 flex-col items-center justify-center gap-2">
-              <span className="grid size-12 place-items-center rounded-2xl border border-[#ff4038]/45 bg-[#ff4038]/12 text-3xl font-black text-[#ff625d]">
+              <span className="grid size-12 place-items-center rounded-2xl border border-[#C0392B]/45 bg-[#C0392B]/12 text-3xl font-black text-[#C0392B]">
                 +
               </span>
               <span className="text-xl font-black text-white">
@@ -208,7 +208,7 @@ export function WarrantyStatusPage({
             >
               <input
                 autoComplete="off"
-                className="h-11 w-full rounded-xl border border-white/14 bg-[#0e0e0e] px-3 text-base font-bold uppercase tracking-wide text-white outline-none transition placeholder:normal-case placeholder:tracking-normal placeholder:text-white/42 focus:border-[#ff3a35] focus:ring-4 focus:ring-[#ff3a35]/16"
+                className="h-11 w-full rounded-xl border border-white/14 bg-[#080205] px-3 text-base font-bold uppercase tracking-wide text-white outline-none transition placeholder:normal-case placeholder:tracking-normal placeholder:text-white/42 focus:border-[#C0392B] focus:ring-4 focus:ring-[#C0392B]/16"
                 inputMode="text"
                 onChange={(event) =>
                   setWalletSerialInput(
@@ -220,7 +220,7 @@ export function WarrantyStatusPage({
                 value={walletSerialInput}
               />
               <button
-                className="h-11 rounded-xl bg-gradient-to-r from-[#ff4038] to-[#df160d] text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-65"
+                className="h-11 rounded-xl bg-gradient-to-r from-[#C0392B] to-[#C0392B] text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-65"
                 disabled={isCheckingSerial}
                 type="submit"
               >
@@ -270,10 +270,10 @@ function WarrantyVehicleCard({
   ]
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-[#ff3a35]/35 bg-[#080808] shadow-[0_16px_38px_rgba(255,42,35,0.16)]">
+    <article className="overflow-hidden rounded-2xl border border-[#C0392B]/35 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.16)]">
       <button
         aria-expanded={isExpanded}
-        className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden bg-[#080808] p-4 text-left transition active:scale-[0.99]"
+        className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden bg-[#080205] p-4 text-left transition active:scale-[0.99]"
         onClick={onToggle}
         type="button"
       >
@@ -337,7 +337,7 @@ function WarrantyVehicleCard({
         ].join(' ')}
       >
         <div className="min-h-0 overflow-hidden">
-          <div className="grid grid-cols-2 gap-2 bg-[#080808] p-4">
+          <div className="grid grid-cols-2 gap-2 bg-[#080205] p-4">
             {fields.map((field) => (
               <WarrantyCardField
                 key={field.label}

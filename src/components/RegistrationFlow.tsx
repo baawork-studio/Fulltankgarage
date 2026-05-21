@@ -8,12 +8,12 @@ import {
 
 export function RegistrationGateSkeleton() {
   return (
-    <section className="rounded-[1.5rem] border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(255,24,20,0.2)]">
+    <section className="rounded-[1.5rem] border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(192,57,43,0.2)]">
       <div className="flex w-full flex-col gap-[clamp(0.9rem,1.8dvh,1.15rem)]">
         <div className="mx-auto aspect-square w-[clamp(8.75rem,22dvh,12.5rem)] max-w-[58%] rounded-xl skeleton-shimmer" />
         <div className="space-y-[clamp(0.8rem,1.55dvh,1rem)]">
           <div className="mx-auto h-8 w-4/5 rounded-xl skeleton-shimmer sm:h-9" />
-          <div className="h-12 w-full rounded-xl border border-white/14 bg-[#0e0e0e] skeleton-shimmer" />
+          <div className="h-12 w-full rounded-xl border border-white/14 bg-[#080205] skeleton-shimmer" />
           <div className="flex items-center gap-2.5">
             <div className="size-5 shrink-0 rounded border border-white/20 skeleton-shimmer" />
             <div className="h-5 min-w-0 flex-1 rounded-xl skeleton-shimmer" />
@@ -41,7 +41,7 @@ export function SerialGate({
   serialNumber: string
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(255,24,20,0.2)]">
+    <section className="rounded-[1.5rem] border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(192,57,43,0.2)]">
       <form
         className="flex w-full flex-col gap-[clamp(0.9rem,1.8dvh,1.15rem)]"
         onSubmit={onSubmit}
@@ -53,13 +53,13 @@ export function SerialGate({
         />
 
         <div className="space-y-[clamp(0.8rem,1.55dvh,1rem)]">
-          <h1 className="text-center text-2xl font-black leading-tight text-[#ff3838] sm:text-3xl">
+          <h1 className="text-center text-2xl font-black leading-tight text-[#C0392B] sm:text-3xl">
             ลงทะเบียนรับประกันสินค้า
           </h1>
 
           <input
             autoComplete="off"
-            className="h-12 w-full rounded-xl border border-white/14 bg-[#0e0e0e] px-4 text-base font-semibold uppercase tracking-wide text-white outline-none transition placeholder:normal-case placeholder:tracking-normal placeholder:text-white/45 focus:border-[#ff3a35] focus:ring-4 focus:ring-[#ff3a35]/16"
+            className="h-12 w-full rounded-xl border border-white/14 bg-[#080205] px-4 text-base font-semibold uppercase tracking-wide text-white outline-none transition placeholder:normal-case placeholder:tracking-normal placeholder:text-white/45 focus:border-[#C0392B] focus:ring-4 focus:ring-[#C0392B]/16"
             inputMode="text"
             onChange={(event) =>
               onSerialChange(onlyEnglishLettersAndDigits(event.target.value))
@@ -72,7 +72,7 @@ export function SerialGate({
           <label className="flex items-center gap-2.5 text-[clamp(0.78rem,3.45vw,1rem)] font-semibold leading-6 text-white">
             <input
               checked={isConsentAccepted}
-              className="size-5 shrink-0 rounded border-white/35 accent-[#ff2f2b]"
+              className="size-5 shrink-0 rounded border-white/35 accent-[#C0392B]"
               onChange={(event) => onConsentChange(event.target.checked)}
               type="checkbox"
             />
@@ -82,7 +82,7 @@ export function SerialGate({
           </label>
 
           <button
-            className="h-12 w-full rounded-xl bg-gradient-to-r from-[#ff3b3b] to-[#d91605] text-base font-black text-white shadow-[0_14px_28px_rgba(232,26,13,0.2)] transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
+            className="h-12 w-full rounded-xl bg-gradient-to-r from-[#C0392B] to-[#C0392B] text-base font-black text-white shadow-[0_14px_28px_rgba(192,57,43,0.2)] transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
             disabled={isChecking}
             type="submit"
           >
@@ -110,7 +110,7 @@ export function WarrantyForm({
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(255,30,26,0.18)]">
+    <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(192,57,43,0.18)]">
       <div className="mb-5 flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-black text-white">
@@ -216,7 +216,7 @@ export function WarrantyForm({
           รูปใบเสร็จ/หลักฐาน
           <input
             accept="image/*,.pdf"
-            className="mt-2 block w-full rounded-xl border border-white/14 bg-[#101010] px-3 py-3 text-sm text-white file:mr-3 file:rounded-lg file:border-0 file:bg-[#ff332f] file:px-3 file:py-2 file:text-sm file:font-bold file:text-white"
+            className="mt-2 block w-full rounded-xl border border-white/14 bg-[#101010] px-3 py-3 text-sm text-white file:mr-3 file:rounded-lg file:border-0 file:bg-[#C0392B] file:px-3 file:py-2 file:text-sm file:font-bold file:text-white"
             name="receiptFile"
             onChange={onChange}
             type="file"
@@ -226,7 +226,7 @@ export function WarrantyForm({
         <label className="block text-sm font-bold text-white/86">
           หมายเหตุ
           <textarea
-            className="mt-2 min-h-24 w-full rounded-xl border border-white/14 bg-[#101010] px-4 py-3 text-base text-white outline-none placeholder:text-white/38 focus:border-[#ff3a35] focus:ring-4 focus:ring-[#ff3a35]/16"
+            className="mt-2 min-h-24 w-full rounded-xl border border-white/14 bg-[#101010] px-4 py-3 text-base text-white outline-none placeholder:text-white/38 focus:border-[#C0392B] focus:ring-4 focus:ring-[#C0392B]/16"
             name="remarks"
             onChange={onChange}
             placeholder="ข้อมูลเพิ่มเติม"
@@ -235,7 +235,7 @@ export function WarrantyForm({
         </label>
 
         <button
-          className="h-14 w-full rounded-xl bg-gradient-to-r from-[#ff3b3b] to-[#d91605] text-lg font-black text-white transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
+          className="h-14 w-full rounded-xl bg-gradient-to-r from-[#C0392B] to-[#C0392B] text-lg font-black text-white transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
           disabled={isSubmitting}
           type="submit"
         >
@@ -281,7 +281,7 @@ function Field({
         type={type}
         value={value}
       />
-      {error ? <span className="mt-1 block text-xs text-[#ff625f]">{error}</span> : null}
+      {error ? <span className="mt-1 block text-xs text-[#C0392B]">{error}</span> : null}
     </label>
   )
 }
@@ -294,8 +294,8 @@ export function SuccessCard({
   serialNumber: string
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-6 text-center shadow-[0_0_34px_rgba(255,30,26,0.18)]">
-      <div className="mx-auto grid size-20 place-items-center rounded-full bg-[#ff332f] text-4xl font-black">
+    <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-6 text-center shadow-[0_0_34px_rgba(192,57,43,0.18)]">
+      <div className="mx-auto grid size-20 place-items-center rounded-full bg-[#C0392B] text-4xl font-black">
         ✓
       </div>
       <h1 className="mt-5 text-3xl font-black text-white">
@@ -324,7 +324,7 @@ export function Notice({ message, tone }: { message: string; tone: NoticeTone })
           tone === 'success'
             ? 'border-[#00d084]/30 bg-[#00d084]'
             : tone === 'error'
-              ? 'border-[#ff5a76]/30 bg-[#ff5a76]'
+              ? 'border-[#C0392B]/30 bg-[#C0392B]'
               : 'border-[#00b5e8]/30 bg-[#00b5e8]',
         ].join(' ')}
         role="status"

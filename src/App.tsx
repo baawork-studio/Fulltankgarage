@@ -365,7 +365,7 @@ function App() {
   return (
     <main
       className={[
-        'min-h-dvh bg-[#070707] text-white',
+        'min-h-dvh bg-[#080205] text-white',
         isWarrantySurface ? 'p-0' : 'p-3',
       ].join(' ')}
     >
