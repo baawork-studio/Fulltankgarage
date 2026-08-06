@@ -184,6 +184,27 @@ export function WarrantyForm({
           />
         </div>
 
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Field
+            label="รหัสฟิล์มบานหน้า"
+            name="frontFilmCode"
+            onChange={onChange}
+            value={form.frontFilmCode}
+          />
+          <Field
+            label="รหัสฟิล์มรอบคัน"
+            name="fullCarFilmCode"
+            onChange={onChange}
+            value={form.fullCarFilmCode}
+          />
+          <Field
+            label="รหัสฟิล์มซันรูฟ"
+            name="sunroofFilmCode"
+            onChange={onChange}
+            value={form.sunroofFilmCode}
+          />
+        </div>
+
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
             error={errors.installDate}

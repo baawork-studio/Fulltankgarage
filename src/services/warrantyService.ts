@@ -15,6 +15,9 @@ export type WarrantyRegisterPayload = LineIdentity & {
   licensePlate: string
   filmBrand: string
   filmModel: string
+  frontFilmCode: string
+  fullCarFilmCode: string
+  sunroofFilmCode: string
   installDate: string
   branch: string
   installerName: string
@@ -32,6 +35,9 @@ export type WarrantyRegistration = {
   licensePlate: string
   filmBrand: string
   filmModel: string
+  frontFilmCode?: string
+  fullCarFilmCode?: string
+  sunroofFilmCode?: string
   installDate?: string | null
   branch: string
   installerName?: string
@@ -74,6 +80,9 @@ export const registerWarranty = async (payload: WarrantyRegisterPayload) => {
   formData.append('licensePlate', payload.licensePlate)
   formData.append('filmBrand', payload.filmBrand)
   formData.append('filmModel', payload.filmModel)
+  appendOptional(formData, 'frontFilmCode', payload.frontFilmCode)
+  appendOptional(formData, 'fullCarFilmCode', payload.fullCarFilmCode)
+  appendOptional(formData, 'sunroofFilmCode', payload.sunroofFilmCode)
   formData.append('installDate', payload.installDate)
   formData.append('branch', payload.branch)
   appendOptional(formData, 'installerName', payload.installerName)
