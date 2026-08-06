@@ -66,13 +66,36 @@ export const formatWarrantyPeriod = (
   installDate?: string | null,
   warrantyExpiresAt?: string | null,
 ) => {
-  const expiryDate = warrantyExpiresAt || getWarrantyExpiryFromInstallDate(installDate)
+  const warrantyStatus = getWarrantyStatus(installDate, warrantyExpiresAt)
 
-  if (!expiryDate) {
+  if (!warrantyStatus.expiryDate) {
     return '-'
   }
 
-  return `7 ปี ถึง ${formatThaiDate(expiryDate)}`
+  return warrantyStatus.isExpired
+    ? `หมดอายุเมื่อ ${formatThaiDate(warrantyStatus.expiryDate)}`
+    : `7 ปี ถึง ${formatThaiDate(warrantyStatus.expiryDate)}`
+}
+
+export const getWarrantyStatus = (
+  installDate?: string | null,
+  warrantyExpiresAt?: string | null,
+) => {
+  const expiryDate = warrantyExpiresAt || getWarrantyExpiryFromInstallDate(installDate)
+  if (!expiryDate) {
+    return { expiryDate: null, isExpired: false }
+  }
+
+  const expiry = new Date(expiryDate)
+  if (Number.isNaN(expiry.getTime())) {
+    return { expiryDate: null, isExpired: false }
+  }
+
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  expiry.setHours(0, 0, 0, 0)
+
+  return { expiryDate, isExpired: today > expiry }
 }
 
 const getWarrantyExpiryFromInstallDate = (installDate?: string | null) => {

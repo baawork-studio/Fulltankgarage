@@ -6,7 +6,7 @@ import { openProfileLiff, type LineIdentity } from '../lib/liff'
 import type { RegisteredMember } from '../services/authService'
 import type { WarrantyRegistration } from '../services/warrantyService'
 import { onlyEnglishLettersAndDigits } from '../utils/registration'
-import { formatThaiDate, formatWarrantyPeriod, getDisplayValue, getStatusMeta } from '../utils/warrantyDisplay'
+import { formatThaiDate, formatWarrantyPeriod, getDisplayValue, getStatusMeta, getWarrantyStatus } from '../utils/warrantyDisplay'
 
 export function WarrantyStatusSkeleton() {
   return (
@@ -251,6 +251,10 @@ function WarrantyVehicleCard({
   const displayName = registration.customerName || displayNameFallback
   const vehicleTitle =
     registration.licensePlate || registration.carModel || `คันที่ ${index + 1}`
+  const warrantyStatus = getWarrantyStatus(
+    registration.installDate,
+    registration.warrantyExpiresAt,
+  )
   const fields = [
     { label: 'เบอร์โทร', value: registration.phone },
     { label: 'รุ่นรถ', value: registration.carModel },
@@ -308,8 +312,13 @@ function WarrantyVehicleCard({
                 </h2>
               </div>
             </div>
-            <span className="shrink-0 rounded-full bg-[#00d695] px-3 py-1 text-xs font-black text-white">
-              ใช้งานได้
+            <span
+              className={[
+                'shrink-0 rounded-full px-3 py-1 text-xs font-black text-white',
+                warrantyStatus.isExpired ? 'bg-white/28 text-white/78' : 'bg-[#00d695]',
+              ].join(' ')}
+            >
+              {warrantyStatus.isExpired ? 'หมดอายุ' : 'ใช้งานได้'}
             </span>
           </div>
 
