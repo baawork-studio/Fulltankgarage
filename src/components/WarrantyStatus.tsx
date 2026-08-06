@@ -6,7 +6,7 @@ import { openProfileLiff, type LineIdentity } from '../lib/liff'
 import type { RegisteredMember } from '../services/authService'
 import type { WarrantyRegistration } from '../services/warrantyService'
 import { onlyEnglishLettersAndDigits } from '../utils/registration'
-import { formatThaiDate, getDisplayValue, getStatusMeta } from '../utils/warrantyDisplay'
+import { formatThaiDate, formatWarrantyPeriod, getDisplayValue, getStatusMeta } from '../utils/warrantyDisplay'
 
 export function WarrantyStatusSkeleton() {
   return (
@@ -31,7 +31,7 @@ export function WarrantyStatusSkeleton() {
 
       <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 py-5 pb-[calc(env(safe-area-inset-bottom)+18px)]">
         <div className="overflow-hidden rounded-2xl border border-[#C0392B]/35 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.16)]">
-          <div className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden bg-[#080205] p-4">
+          <div className="relative flex aspect-667/374 min-h-50 w-full overflow-hidden bg-[#080205] p-4">
             <img
               alt=""
               className="absolute inset-0 size-full object-fill opacity-40"
@@ -78,7 +78,7 @@ export function WarrantyStatusSkeleton() {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-dashed border-[#C0392B]/45 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.12)]">
-          <div className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden p-5 text-center">
+          <div className="relative flex aspect-667/374 min-h-50 w-full overflow-hidden p-5 text-center">
             <img
               alt=""
               className="absolute inset-0 size-full object-fill opacity-30"
@@ -178,7 +178,7 @@ export function WarrantyStatusPage({
 
         <div className="overflow-hidden rounded-2xl border border-dashed border-[#C0392B]/45 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.12)]">
           <button
-            className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden p-5 text-center transition active:scale-[0.99]"
+            className="relative flex aspect-667/374 min-h-50 w-full overflow-hidden p-5 text-center transition active:scale-[0.99]"
             onClick={() => setIsAddingSerial((current) => !current)}
             type="button"
           >
@@ -220,7 +220,7 @@ export function WarrantyStatusPage({
                 value={walletSerialInput}
               />
               <button
-                className="h-11 rounded-xl bg-gradient-to-r from-[#C0392B] to-[#C0392B] text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-65"
+                className="h-11 rounded-xl bg-linear-to-r from-[#C0392B] to-[#C0392B] text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-65"
                 disabled={isCheckingSerial}
                 type="submit"
               >
@@ -267,13 +267,20 @@ function WarrantyVehicleCard({
     },
     { label: 'สาขาที่ติดตั้ง', value: registration.branch },
     { label: 'ผู้ติดตั้ง', value: registration.installerName },
+    {
+      label: 'ระยะเวลารับประกัน',
+      value: formatWarrantyPeriod(
+        registration.installDate,
+        registration.warrantyExpiresAt,
+      ),
+    },
   ]
 
   return (
     <article className="overflow-hidden rounded-2xl border border-[#C0392B]/35 bg-[#080205] shadow-[0_16px_38px_rgba(192,57,43,0.16)]">
       <button
         aria-expanded={isExpanded}
-        className="relative flex aspect-[667/374] min-h-[12.5rem] w-full overflow-hidden bg-[#080205] p-4 text-left transition active:scale-[0.99]"
+        className="relative flex aspect-667/374 min-h-50 w-full overflow-hidden bg-[#080205] p-4 text-left transition active:scale-[0.99]"
         onClick={onToggle}
         type="button"
       >
@@ -371,7 +378,7 @@ function WarrantyCardField({
   return (
     <div className="min-w-0 rounded-xl border border-white/10 bg-black/24 px-3 py-2 backdrop-blur-[2px]">
       <p className="truncate text-[0.66rem] font-black text-white/42">{label}</p>
-      <p className="mt-1 break-words text-sm font-black leading-5 text-white">
+      <p className="mt-1 wrap-break-word text-sm font-black leading-5 text-white">
         {getDisplayValue(value)}
       </p>
     </div>
@@ -404,7 +411,7 @@ export function RegistrationStatusPage({
   ]
 
   return (
-    <section className="min-h-[calc(100dvh-2.5rem)] overflow-hidden rounded-[1.5rem] bg-[#fbf7f0] text-[#4b3527] shadow-[0_18px_46px_rgba(0,0,0,0.18)]">
+    <section className="min-h-[calc(100dvh-2.5rem)] overflow-hidden rounded-3xl bg-[#fbf7f0] text-[#4b3527] shadow-[0_18px_46px_rgba(0,0,0,0.18)]">
       <header className="sticky top-0 z-10 border-b border-[#ead8c4] bg-[#fffaf3]/95 px-4 pb-3 pt-[calc(env(safe-area-inset-top)+14px)] backdrop-blur">
         <div className="flex items-center gap-3">
           <img
@@ -472,11 +479,11 @@ export function RegistrationStatusPage({
             {storefrontImage ? (
               <img
                 alt="รูปหน้าร้าน"
-                className="aspect-[4/3] w-full rounded-xl object-cover"
+                className="aspect-4/3 w-full rounded-xl object-cover"
                 src={storefrontImage}
               />
             ) : (
-              <div className="grid aspect-[4/3] w-full place-items-center rounded-xl bg-[#f7e9d8] px-5 text-center text-sm leading-6 text-[#8a705b]">
+              <div className="grid aspect-4/3 w-full place-items-center rounded-xl bg-[#f7e9d8] px-5 text-center text-sm leading-6 text-[#8a705b]">
                 ยังไม่มีรูปหน้าร้าน
               </div>
             )}
@@ -527,7 +534,7 @@ function StatusField({
             {value}
           </a>
         ) : (
-          <span className="break-words">{getDisplayValue(value)}</span>
+          <span className="wrap-break-word">{getDisplayValue(value)}</span>
         )}
       </div>
     </div>

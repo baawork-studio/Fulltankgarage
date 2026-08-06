@@ -61,3 +61,30 @@ export const formatThaiDate = (value?: string | null) => {
     year: 'numeric',
   }).format(date)
 }
+
+export const formatWarrantyPeriod = (
+  installDate?: string | null,
+  warrantyExpiresAt?: string | null,
+) => {
+  const expiryDate = warrantyExpiresAt || getWarrantyExpiryFromInstallDate(installDate)
+
+  if (!expiryDate) {
+    return '-'
+  }
+
+  return `7 ปี ถึง ${formatThaiDate(expiryDate)}`
+}
+
+const getWarrantyExpiryFromInstallDate = (installDate?: string | null) => {
+  if (!installDate) {
+    return null
+  }
+
+  const date = new Date(installDate)
+  if (Number.isNaN(date.getTime())) {
+    return null
+  }
+
+  date.setFullYear(date.getFullYear() + 7)
+  return date.toISOString()
+}
