@@ -8,7 +8,7 @@ import {
 
 export function RegistrationGateSkeleton() {
   return (
-    <section className="rounded-[1.5rem] border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(192,57,43,0.2)]">
+    <section className="rounded-3xl border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(192,57,43,0.2)]">
       <div className="flex w-full flex-col gap-[clamp(0.9rem,1.8dvh,1.15rem)]">
         <div className="mx-auto aspect-square w-[clamp(8.75rem,22dvh,12.5rem)] max-w-[58%] rounded-xl skeleton-shimmer" />
         <div className="space-y-[clamp(0.8rem,1.55dvh,1rem)]">
@@ -41,7 +41,7 @@ export function SerialGate({
   serialNumber: string
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(192,57,43,0.2)]">
+    <section className="rounded-3xl border border-[#2d2d2d] bg-[#181818] p-[clamp(1rem,2.2dvh,1.25rem)] shadow-[0_0_30px_rgba(192,57,43,0.2)]">
       <form
         className="flex w-full flex-col gap-[clamp(0.9rem,1.8dvh,1.15rem)]"
         onSubmit={onSubmit}
@@ -82,7 +82,7 @@ export function SerialGate({
           </label>
 
           <button
-            className="h-12 w-full rounded-xl bg-gradient-to-r from-[#C0392B] to-[#C0392B] text-base font-black text-white shadow-[0_14px_28px_rgba(192,57,43,0.2)] transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
+            className="h-12 w-full rounded-xl bg-linear-to-r from-[#C0392B] to-[#C0392B] text-base font-black text-white shadow-[0_14px_28px_rgba(192,57,43,0.2)] transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
             disabled={isChecking}
             type="submit"
           >
@@ -110,7 +110,7 @@ export function WarrantyForm({
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(192,57,43,0.18)]">
+    <section className="rounded-3xl border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(192,57,43,0.18)]">
       <div className="mb-5 flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-black text-white">
@@ -256,7 +256,7 @@ export function WarrantyForm({
         </label>
 
         <button
-          className="h-14 w-full rounded-xl bg-gradient-to-r from-[#C0392B] to-[#C0392B] text-lg font-black text-white transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
+          className="h-14 w-full rounded-xl bg-linear-to-r from-[#C0392B] to-[#C0392B] text-lg font-black text-white transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-65"
           disabled={isSubmitting}
           type="submit"
         >
@@ -315,7 +315,7 @@ export function SuccessCard({
   serialNumber: string
 }) {
   return (
-    <section className="rounded-[1.5rem] border border-white/12 bg-[#151515] p-6 text-center shadow-[0_0_34px_rgba(192,57,43,0.18)]">
+    <section className="rounded-3xl border border-white/12 bg-[#151515] p-6 text-center shadow-[0_0_34px_rgba(192,57,43,0.18)]">
       <div className="mx-auto grid size-20 place-items-center rounded-full bg-[#C0392B] text-4xl font-black">
         ✓
       </div>
@@ -338,7 +338,7 @@ export function SuccessCard({
 
 export function Notice({ message, tone }: { message: string; tone: NoticeTone }) {
   return (
-    <div className="pointer-events-none fixed left-0 right-0 top-[calc(env(safe-area-inset-top)+4.75rem)] z-[120] flex justify-center px-4">
+    <div className="pointer-events-none fixed left-0 right-0 top-[calc(env(safe-area-inset-top)+4.75rem)] z-120 flex justify-center px-4">
       <div
         className={[
           'snackbar-notice w-[min(100%,28rem)] rounded-2xl border px-4 py-3 text-center text-sm font-black leading-6 text-white shadow-[0_18px_42px_rgba(0,0,0,0.35)]',
@@ -360,7 +360,7 @@ export function CompanyFooter({ fillAvailable = false }: { fillAvailable?: boole
   return (
     <footer
       className={[
-        'rounded-[1rem] border border-white/12 bg-[#101010] px-4 text-center text-white/74',
+        'rounded-2xl border border-white/12 bg-[#101010] px-4 text-center text-white/74',
         fillAvailable
           ? 'flex flex-1 py-[clamp(1rem,3dvh,2rem)]'
           : 'py-3',
