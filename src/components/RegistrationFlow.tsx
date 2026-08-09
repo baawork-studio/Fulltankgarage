@@ -223,23 +223,14 @@ export function WarrantyForm({
             value={form.installDate}
           />
           <Field
+            disabled
             error={errors.branch}
             label="สาขา"
             name="branch"
             onChange={onChange}
-            placeholder="บางแค"
             value={form.branch}
           />
         </div>
-
-        <Field
-          error={errors.installerName}
-          label="ชื่อช่างติดตั้ง"
-          name="installerName"
-          onChange={onChange}
-          placeholder="ชื่อช่าง"
-          value={form.installerName}
-        />
 
         <label className="block text-sm font-bold text-white/86">
           รูปใบเสร็จ/หลักฐาน
@@ -314,6 +305,7 @@ function SelectField({
 }
 
 function Field({
+  disabled = false,
   error,
   label,
   name,
@@ -324,6 +316,7 @@ function Field({
   inputMode,
   maxLength,
 }: {
+  disabled?: boolean
   error?: string
   label: string
   name: keyof RegistrationForm
@@ -342,7 +335,8 @@ function Field({
       <span className="relative mt-2 block">
         <input
           aria-invalid={Boolean(error)}
-          className={`${getInputClass(Boolean(error))} ${showDatePlaceholder ? 'text-transparent' : ''}`}
+          className={`${getInputClass(Boolean(error))} ${showDatePlaceholder ? 'text-transparent' : ''} disabled:cursor-not-allowed disabled:opacity-50`}
+          disabled={disabled}
           inputMode={inputMode}
           maxLength={maxLength}
           name={name}

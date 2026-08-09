@@ -45,6 +45,8 @@ import {
   onlyEnglishLettersAndDigits,
 } from './utils/registration'
 
+const fulltankBangKhaeBranch = 'FULLTANK Garage สาขาบางแค'
+
 const initialForm: RegistrationForm = {
   serialNumber: '',
   customerName: '',
@@ -57,7 +59,7 @@ const initialForm: RegistrationForm = {
   fullCarFilmCode: '',
   sunroofFilmCode: '',
   installDate: '',
-  branch: '',
+  branch: fulltankBangKhaeBranch,
   installerName: '',
   receiptFile: null,
   remarks: '',
@@ -266,7 +268,7 @@ function App() {
         serialNumber: normalizedWalletSerial,
         customerName: latestWarranty?.customerName ?? '',
         phone: latestWarranty?.phone ?? '',
-        branch: latestWarranty?.branch ?? '',
+        branch: fulltankBangKhaeBranch,
       })
       setPhase('form')
       showNotice('ตรวจสอบหมายเลขสำเร็จ กรุณากรอกข้อมูลรถ/ฟิล์ม', 'success')
