@@ -207,9 +207,9 @@ export function WarrantyForm({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          {frontCodes.length > 0 ? <SelectField label="รหัสฟิล์มบานหน้า" name="frontFilmCode" onChange={onChange} options={frontCodes} placeholder="-- เลือกรหัสฟิล์มบานหน้า --" value={form.frontFilmCode} /> : <Field label="รหัสฟิล์มบานหน้า" name="frontFilmCode" onChange={onChange} placeholder="กรอกรหัสฟิล์มบานหน้า" value={form.frontFilmCode} />}
-          {fullCarCodes.length > 0 ? <SelectField label="รหัสฟิล์มรอบคัน" name="fullCarFilmCode" onChange={onChange} options={fullCarCodes} placeholder="-- เลือกรหัสฟิล์มรอบคัน --" value={form.fullCarFilmCode} /> : <Field label="รหัสฟิล์มรอบคัน" name="fullCarFilmCode" onChange={onChange} placeholder="กรอกรหัสฟิล์มรอบคัน" value={form.fullCarFilmCode} />}
-          {sunroofCodes.length > 0 ? <SelectField label="รหัสฟิล์มซันรูฟ" name="sunroofFilmCode" onChange={onChange} options={sunroofCodes} placeholder="-- เลือกรหัสฟิล์มซันรูฟ --" value={form.sunroofFilmCode} /> : <Field label="รหัสฟิล์มซันรูฟ" name="sunroofFilmCode" onChange={onChange} placeholder="กรอกรหัสฟิล์มซันรูฟ" value={form.sunroofFilmCode} />}
+          <SelectField disabled={frontCodes.length === 0} label="รหัสฟิล์มบานหน้า" name="frontFilmCode" onChange={onChange} options={frontCodes} placeholder={frontCodes.length > 0 ? '-- เลือกรหัสฟิล์มบานหน้า --' : '-- ไม่มีข้อมูลรหัสฟิล์มบานหน้า --'} value={form.frontFilmCode} />
+          <SelectField disabled={fullCarCodes.length === 0} label="รหัสฟิล์มรอบคัน" name="fullCarFilmCode" onChange={onChange} options={fullCarCodes} placeholder={fullCarCodes.length > 0 ? '-- เลือกรหัสฟิล์มรอบคัน --' : '-- ไม่มีข้อมูลรหัสฟิล์มรอบคัน --'} value={form.fullCarFilmCode} />
+          <SelectField disabled={sunroofCodes.length === 0} label="รหัสฟิล์มซันรูฟ" name="sunroofFilmCode" onChange={onChange} options={sunroofCodes} placeholder={sunroofCodes.length > 0 ? '-- เลือกรหัสฟิล์มซันรูฟ --' : '-- ไม่มีข้อมูลรหัสฟิล์มซันรูฟ --'} value={form.sunroofFilmCode} />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
