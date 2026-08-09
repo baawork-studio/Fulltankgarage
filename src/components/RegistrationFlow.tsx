@@ -120,10 +120,13 @@ export function WarrantyForm({
     () => [...new Set(filmModels.filter((item) => item.brand === form.filmBrand).map((item) => item.series))],
     [filmModels, form.filmBrand],
   )
-  const codes = useMemo(
+  const selectedModels = useMemo(
     () => filmModels.filter((item) => item.brand === form.filmBrand && item.series === form.filmModel),
     [filmModels, form.filmBrand, form.filmModel],
   )
+  const frontCodes = useMemo(() => selectedModels.flatMap((item) => item.frontCodes), [selectedModels])
+  const fullCarCodes = useMemo(() => selectedModels.flatMap((item) => item.fullCarCodes), [selectedModels])
+  const sunroofCodes = useMemo(() => selectedModels.flatMap((item) => item.sunroofCodes), [selectedModels])
 
   return (
     <section className="rounded-3xl border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(192,57,43,0.18)]">
@@ -188,7 +191,7 @@ export function WarrantyForm({
             name="filmBrand"
             onChange={onChange}
             options={brands}
-            placeholder="เลือกแบรนด์ฟิล์ม"
+            placeholder="-- เลือกแบรนด์ฟิล์ม --"
             value={form.filmBrand}
           />
           <SelectField
@@ -197,40 +200,16 @@ export function WarrantyForm({
             name="filmModel"
             onChange={onChange}
             options={series}
-            placeholder="เลือกรุ่นฟิล์ม"
+            placeholder="-- เลือกรุ่นฟิล์ม --"
             disabled={!form.filmBrand}
             value={form.filmModel}
           />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <SelectField
-            label="รหัสฟิล์มบานหน้า"
-            name="frontFilmCode"
-            onChange={onChange}
-            options={codes.map((item) => item.code)}
-            placeholder="เลือกรหัสฟิล์มบานหน้า"
-            disabled={!form.filmModel}
-            value={form.frontFilmCode}
-          />
-          <SelectField
-            label="รหัสฟิล์มรอบคัน"
-            name="fullCarFilmCode"
-            onChange={onChange}
-            options={codes.map((item) => item.code)}
-            placeholder="เลือกรหัสฟิล์มรอบคัน"
-            disabled={!form.filmModel}
-            value={form.fullCarFilmCode}
-          />
-          <SelectField
-            label="รหัสฟิล์มซันรูฟ"
-            name="sunroofFilmCode"
-            onChange={onChange}
-            options={codes.map((item) => item.code)}
-            placeholder="เลือกรหัสฟิล์มซันรูฟ"
-            disabled={!form.filmModel}
-            value={form.sunroofFilmCode}
-          />
+          {frontCodes.length > 0 ? <SelectField label="รหัสฟิล์มบานหน้า" name="frontFilmCode" onChange={onChange} options={frontCodes} placeholder="-- เลือกรหัสฟิล์มบานหน้า --" value={form.frontFilmCode} /> : <Field label="รหัสฟิล์มบานหน้า" name="frontFilmCode" onChange={onChange} placeholder="กรอกรหัสฟิล์มบานหน้า" value={form.frontFilmCode} />}
+          {fullCarCodes.length > 0 ? <SelectField label="รหัสฟิล์มรอบคัน" name="fullCarFilmCode" onChange={onChange} options={fullCarCodes} placeholder="-- เลือกรหัสฟิล์มรอบคัน --" value={form.fullCarFilmCode} /> : <Field label="รหัสฟิล์มรอบคัน" name="fullCarFilmCode" onChange={onChange} placeholder="กรอกรหัสฟิล์มรอบคัน" value={form.fullCarFilmCode} />}
+          {sunroofCodes.length > 0 ? <SelectField label="รหัสฟิล์มซันรูฟ" name="sunroofFilmCode" onChange={onChange} options={sunroofCodes} placeholder="-- เลือกรหัสฟิล์มซันรูฟ --" value={form.sunroofFilmCode} /> : <Field label="รหัสฟิล์มซันรูฟ" name="sunroofFilmCode" onChange={onChange} placeholder="กรอกรหัสฟิล์มซันรูฟ" value={form.sunroofFilmCode} />}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -239,6 +218,7 @@ export function WarrantyForm({
             label="วันที่ติดตั้ง"
             name="installDate"
             onChange={onChange}
+            placeholder="-- เลือกวันที่ติดตั้ง --"
             type="date"
             value={form.installDate}
           />
@@ -354,20 +334,29 @@ function Field({
   inputMode?: 'tel' | 'numeric'
   maxLength?: number
 }) {
+  const showDatePlaceholder = type === 'date' && !value
+
   return (
     <label className="block min-w-0 text-sm font-bold text-white/86">
       {label}
-      <input
-        aria-invalid={Boolean(error)}
-        className={getInputClass(Boolean(error))}
-        inputMode={inputMode}
-        maxLength={maxLength}
-        name={name}
-        onChange={onChange}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-      />
+      <span className="relative mt-2 block">
+        <input
+          aria-invalid={Boolean(error)}
+          className={`${getInputClass(Boolean(error))} ${showDatePlaceholder ? 'text-transparent' : ''}`}
+          inputMode={inputMode}
+          maxLength={maxLength}
+          name={name}
+          onChange={onChange}
+          placeholder={placeholder}
+          type={type}
+          value={value}
+        />
+        {showDatePlaceholder ? (
+          <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-base font-semibold text-white/45">
+            {placeholder}
+          </span>
+        ) : null}
+      </span>
       {error ? <span className="mt-1 block text-xs text-[#C0392B]">{error}</span> : null}
     </label>
   )

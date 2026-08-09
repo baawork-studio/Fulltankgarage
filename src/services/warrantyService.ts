@@ -56,6 +56,9 @@ export type FilmModel = {
   brand: string
   series: string
   code: string
+  frontCodes: string[]
+  fullCarCodes: string[]
+  sunroofCodes: string[]
   notes: string
 }
 
@@ -81,7 +84,12 @@ export const checkSerialNumber = async (serialNumber: string) => {
 
 export const getFilmModels = async () => {
   const { data } = await api.get<FilmModel[]>('/public/film-models')
-  return data
+  return data.map((item) => ({
+    ...item,
+    frontCodes: item.frontCodes ?? [],
+    fullCarCodes: item.fullCarCodes ?? [],
+    sunroofCodes: item.sunroofCodes ?? [],
+  }))
 }
 
 export const registerWarranty = async (payload: WarrantyRegisterPayload) => {
