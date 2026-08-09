@@ -51,6 +51,14 @@ export type WarrantyRegistration = {
   updatedAt?: string
 }
 
+export type FilmModel = {
+  id: number
+  brand: string
+  series: string
+  code: string
+  notes: string
+}
+
 export type WarrantyRegisterResponse = {
   data: WarrantyRegistration
   items?: WarrantyRegistration[]
@@ -68,6 +76,11 @@ export const checkSerialNumber = async (serialNumber: string) => {
     `/serial-numbers/${encodeURIComponent(serialNumber)}`,
   )
 
+  return data
+}
+
+export const getFilmModels = async () => {
+  const { data } = await api.get<FilmModel[]>('/public/film-models')
   return data
 }
 

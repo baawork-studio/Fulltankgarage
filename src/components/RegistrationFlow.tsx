@@ -1,5 +1,6 @@
-import type { ChangeEvent, FormEvent } from 'react'
+import { useMemo, type ChangeEvent, type FormEvent } from 'react'
 import fulltankGarageLogo from '../assets/fulltank-garage-logo.jpg'
+import type { FilmModel } from '../services/warrantyService'
 import type { NoticeTone, RegistrationForm } from '../types/registration'
 import {
   getInputClass,
@@ -97,6 +98,7 @@ export function SerialGate({
 export function WarrantyForm({
   errors,
   form,
+  filmModels,
   isSubmitting,
   onBack,
   onChange,
@@ -104,11 +106,25 @@ export function WarrantyForm({
 }: {
   errors: Record<string, string>
   form: RegistrationForm
+  filmModels: FilmModel[]
   isSubmitting: boolean
   onBack: () => void
-  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
 }) {
+  const brands = useMemo(
+    () => [...new Set(filmModels.map((item) => item.brand))],
+    [filmModels],
+  )
+  const series = useMemo(
+    () => [...new Set(filmModels.filter((item) => item.brand === form.filmBrand).map((item) => item.series))],
+    [filmModels, form.filmBrand],
+  )
+  const codes = useMemo(
+    () => filmModels.filter((item) => item.brand === form.filmBrand && item.series === form.filmModel),
+    [filmModels, form.filmBrand, form.filmModel],
+  )
+
   return (
     <section className="rounded-3xl border border-white/12 bg-[#151515] p-4 shadow-[0_0_34px_rgba(192,57,43,0.18)]">
       <div className="mb-5 flex items-start justify-between gap-3">
@@ -166,41 +182,53 @@ export function WarrantyForm({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field
+          <SelectField
             error={errors.filmBrand}
             label="แบรนด์ฟิล์ม"
             name="filmBrand"
             onChange={onChange}
-            placeholder="SolarKey"
+            options={brands}
+            placeholder="เลือกแบรนด์ฟิล์ม"
             value={form.filmBrand}
           />
-          <Field
+          <SelectField
             error={errors.filmModel}
             label="รุ่นฟิล์ม"
             name="filmModel"
             onChange={onChange}
-            placeholder="Ultra ir"
+            options={series}
+            placeholder="เลือกรุ่นฟิล์ม"
+            disabled={!form.filmBrand}
             value={form.filmModel}
           />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field
+          <SelectField
             label="รหัสฟิล์มบานหน้า"
             name="frontFilmCode"
             onChange={onChange}
+            options={codes.map((item) => item.code)}
+            placeholder="เลือกรหัสฟิล์มบานหน้า"
+            disabled={!form.filmModel}
             value={form.frontFilmCode}
           />
-          <Field
+          <SelectField
             label="รหัสฟิล์มรอบคัน"
             name="fullCarFilmCode"
             onChange={onChange}
+            options={codes.map((item) => item.code)}
+            placeholder="เลือกรหัสฟิล์มรอบคัน"
+            disabled={!form.filmModel}
             value={form.fullCarFilmCode}
           />
-          <Field
+          <SelectField
             label="รหัสฟิล์มซันรูฟ"
             name="sunroofFilmCode"
             onChange={onChange}
+            options={codes.map((item) => item.code)}
+            placeholder="เลือกรหัสฟิล์มซันรูฟ"
+            disabled={!form.filmModel}
             value={form.sunroofFilmCode}
           />
         </div>
@@ -264,6 +292,44 @@ export function WarrantyForm({
         </button>
       </form>
     </section>
+  )
+}
+
+function SelectField({
+  disabled = false,
+  error,
+  label,
+  name,
+  onChange,
+  options,
+  placeholder,
+  value,
+}: {
+  disabled?: boolean
+  error?: string
+  label: string
+  name: keyof RegistrationForm
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void
+  options: string[]
+  placeholder: string
+  value?: string
+}) {
+  return (
+    <label className="block min-w-0 text-sm font-bold text-white/86">
+      {label}
+      <select
+        aria-invalid={Boolean(error)}
+        className={`${getInputClass(Boolean(error))} disabled:cursor-not-allowed disabled:opacity-50`}
+        disabled={disabled}
+        name={name}
+        onChange={onChange}
+        value={value}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => <option key={option} value={option}>{option}</option>)}
+      </select>
+      {error ? <span className="mt-1 block text-xs text-[#C0392B]">{error}</span> : null}
+    </label>
   )
 }
 

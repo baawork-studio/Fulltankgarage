@@ -12,10 +12,12 @@ import {
 } from './services/authService'
 import {
   checkSerialNumber,
+  getFilmModels,
   getWarrantyRegistrations,
   linkWarrantyBySerial,
   registerWarranty,
   type WarrantyRegistration,
+  type FilmModel,
 } from './services/warrantyService'
 import type { LineIdentity } from './lib/liff'
 import {
@@ -67,6 +69,7 @@ function App() {
   const [serialInput, setSerialInput] = useState(getInitialSerialFromUrl)
   const [isConsentAccepted, setIsConsentAccepted] = useState(false)
   const [form, setForm] = useState<RegistrationForm>(initialForm)
+  const [filmModels, setFilmModels] = useState<FilmModel[]>([])
   const [registeredMember, setRegisteredMember] =
     useState<RegisteredMember | null>(null)
   const [warrantyRegistration, setWarrantyRegistration] =
@@ -112,6 +115,14 @@ function App() {
         window.clearTimeout(noticeTimerRef.current)
       }
     }
+  }, [])
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void getFilmModels().then(setFilmModels).catch(() => {})
+    }, 0)
+
+    return () => window.clearTimeout(timer)
   }, [])
 
   const loadRegistrationStatus = useCallback(async () => {
@@ -271,7 +282,7 @@ function App() {
   }
 
   const handleFormChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const target = event.currentTarget
     const field = target.name as keyof RegistrationForm
@@ -288,7 +299,28 @@ function App() {
     const value =
       field === 'phone' ? onlyDigits(target.value) : target.value
 
-    setForm((current) => ({ ...current, [field]: value }))
+    setForm((current) => {
+      if (field === 'filmBrand') {
+        return {
+          ...current,
+          filmBrand: value,
+          filmModel: '',
+          frontFilmCode: '',
+          fullCarFilmCode: '',
+          sunroofFilmCode: '',
+        }
+      }
+      if (field === 'filmModel') {
+        return {
+          ...current,
+          filmModel: value,
+          frontFilmCode: '',
+          fullCarFilmCode: '',
+          sunroofFilmCode: '',
+        }
+      }
+      return { ...current, [field]: value }
+    })
     setErrors((current) => ({ ...current, [field]: '' }))
     setNotice('')
   }
@@ -409,6 +441,7 @@ function App() {
         ) : phase === 'form' ? (
           <WarrantyForm
             errors={errors}
+            filmModels={filmModels}
             form={form}
             isSubmitting={isSubmitting}
             onBack={() => {
