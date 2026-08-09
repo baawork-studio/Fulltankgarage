@@ -176,7 +176,7 @@ export function WarrantyForm({
           />
           <Field
             error={errors.licensePlate}
-            label="ทะเบียนรถ"
+            label="ทะเบียนรถ / กรณีป้ายแดงใส่เลขตัวถัง"
             name="licensePlate"
             onChange={onChange}
             placeholder="1กก 1234"
